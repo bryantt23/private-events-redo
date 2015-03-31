@@ -1,6 +1,12 @@
 
-<h2> <%= current_user.email %> </h2>
-
 
 <h4> Creator of Event </h4>
 <p>	<%= @event.creator.email %> </p>
+
+<h3> List of Attendees </h3>
+
+<% @attendees.each do |attendee| %>
+
+<p><%= @event.name %> has <%= attendee.email %> attending </p>
+
+<% end %>

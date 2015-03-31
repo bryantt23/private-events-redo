@@ -1,11 +1,13 @@
 class EventsController < ApplicationController
 
+    before_action :authenticate_user!, except: [:index, :show]
+
   def new
-    @event = current_user.events.build
+    @event = current_user.created_events.build
   end
 
   def create
-    @event = current_user.events.build(event_params)
+    @event = current_user.created_events.build(event_params)
 
     if @event.save
       redirect_to @event
@@ -16,6 +18,8 @@ class EventsController < ApplicationController
 
   def show
     @event=Event.find(params[:id])
+
+    		@attendees = @event.attendees
   end
 
   def index
